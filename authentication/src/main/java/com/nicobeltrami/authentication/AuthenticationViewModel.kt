@@ -11,6 +11,16 @@ import kotlinx.coroutines.withContext
 class AuthenticationViewModel : ViewModel() {
     val uiState = MutableStateFlow(AuthenticationState())
 
+    fun handleEvent(authenticationEvent: AuthenticationEvent) {
+        when (authenticationEvent) {
+            AuthenticationEvent.ToggleAuthenticationMode -> toggleAuthenticationMode()
+            is AuthenticationEvent.EmailChanged -> updateEmail(authenticationEvent.emailAddress)
+            is AuthenticationEvent.PasswordChanged -> updatePassword(authenticationEvent.password)
+            AuthenticationEvent.Authenticate -> authenticate()
+            AuthenticationEvent.ErrorDismissed -> dismissError()
+        }
+    }
+
     private fun toggleAuthenticationMode() {
         val authenticationMode = uiState.value.authenticationMode
         val newAuthenticationMode = if (authenticationMode == AuthenticationMode.SIGN_IN) {
@@ -72,15 +82,5 @@ class AuthenticationViewModel : ViewModel() {
         uiState.value = uiState.value.copy(
             error = null
         )
-    }
-
-    fun handleEvent(authenticationEvent: AuthenticationEvent) {
-        when (authenticationEvent) {
-            AuthenticationEvent.ToggleAuthenticationMode -> toggleAuthenticationMode()
-            is AuthenticationEvent.EmailChanged -> updateEmail(authenticationEvent.emailAddress)
-            is AuthenticationEvent.PasswordChanged -> updatePassword(authenticationEvent.password)
-            AuthenticationEvent.Authenticate -> authenticate()
-            AuthenticationEvent.ErrorDismissed -> dismissError()
-        }
     }
 }
