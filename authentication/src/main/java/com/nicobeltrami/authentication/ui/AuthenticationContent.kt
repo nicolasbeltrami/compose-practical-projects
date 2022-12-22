@@ -8,9 +8,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.nicobeltrami.authentication.AuthenticationEvent
 import com.nicobeltrami.authentication.AuthenticationState
+import com.nicobeltrami.authentication.Tags
 
 @Composable
 fun AuthenticationContent(
@@ -22,7 +24,9 @@ fun AuthenticationContent(
         contentAlignment = Alignment.Center
     ) {
         if (authenticationState.isLoading) {
-            CircularProgressIndicator()
+            CircularProgressIndicator(
+                modifier = Modifier.testTag(Tags.TAG_PROGRESS)
+            )
         } else {
             AuthenticationForm(
                 authenticationMode = authenticationState.authenticationMode,

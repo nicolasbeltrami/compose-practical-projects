@@ -13,10 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicobeltrami.authentication.AuthenticationMode
 import com.nicobeltrami.authentication.PasswordRequirements
+import com.nicobeltrami.authentication.Tags
 
 @Composable
 fun AuthenticationForm(
@@ -32,7 +34,8 @@ fun AuthenticationForm(
     onToggleMode: () -> Unit
 ) {
     Column(
-        modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier.testTag(Tags.TAG_CONTENT),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = modifier.height(32.dp))
         AuthenticationTitle(

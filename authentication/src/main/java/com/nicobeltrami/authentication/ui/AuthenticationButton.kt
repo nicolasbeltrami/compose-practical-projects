@@ -6,10 +6,12 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.nicobeltrami.authentication.AuthenticationMode
 import com.nicobeltrami.authentication.R
+import com.nicobeltrami.authentication.Tags
 
 @Composable
 fun AuthenticationButton(
@@ -19,7 +21,7 @@ fun AuthenticationButton(
     onAuthenticate: () -> Unit
 ) {
     Button(
-        modifier = modifier,
+        modifier = modifier.testTag(Tags.TAG_AUTHENTICATE_BUTTON),
         onClick = { onAuthenticate() },
         enabled = enableAuthentication
     ) {

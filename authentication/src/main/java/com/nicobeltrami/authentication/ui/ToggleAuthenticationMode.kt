@@ -8,11 +8,13 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicobeltrami.authentication.AuthenticationMode
 import com.nicobeltrami.authentication.R
+import com.nicobeltrami.authentication.Tags
 
 @Composable
 fun ToggleAuthenticationMode(
@@ -25,6 +27,7 @@ fun ToggleAuthenticationMode(
     ) {
         TextButton(
             modifier = modifier
+                .testTag(Tags.TAG_AUTHENTICATION_TOGGLE)
                 .background(MaterialTheme.colors.surface),
             onClick = {
                 toggleAuthentication()
