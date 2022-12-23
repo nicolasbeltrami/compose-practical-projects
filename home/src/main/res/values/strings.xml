@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Home</string>
+    <string name="cd_create_item">Create new item</string>
 </resources>
