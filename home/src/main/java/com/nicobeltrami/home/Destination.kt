@@ -7,11 +7,12 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Destination(
+    val title: String,
     val path: String,
     val icon: ImageVector? = null
 ) {
-    object Home : Destination("home")
-    object Feed : Destination("feed", Icons.Default.List)
-    object Contacts : Destination("contacts", Icons.Default.Person)
-    object Calendar : Destination("calendar", Icons.Default.DateRange)
+    object Home : Destination("Home","home")
+    object Feed : Destination("Feed","feed", Icons.Default.List)
+    object Contacts : Destination("Contacts","contacts", Icons.Default.Person)
+    object Calendar : Destination("Calendar","calendar", Icons.Default.DateRange)
 }

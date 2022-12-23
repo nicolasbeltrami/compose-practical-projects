@@ -11,6 +11,8 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.rememberNavController
+import com.nicobeltrami.home.Navigation
 import com.nicobeltrami.home.R
 
 @Composable
@@ -18,7 +20,7 @@ fun Home(
     modifier: Modifier = Modifier
 ) {
     val scaffoldState = rememberScaffoldState()
-
+    val navController = rememberNavController()
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
@@ -36,6 +38,9 @@ fun Home(
             }
         }
     ) {
-
+        Navigation(
+            modifier = modifier,
+            navController = navController
+        )
     }
 }
