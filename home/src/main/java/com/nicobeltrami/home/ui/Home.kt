@@ -2,11 +2,13 @@ package com.nicobeltrami.home.ui
 
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -18,9 +20,11 @@ import androidx.navigation.compose.rememberNavController
 import com.nicobeltrami.home.Navigation
 import com.nicobeltrami.home.R
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.nicobeltrami.home.Destination
+import kotlinx.coroutines.launch
 
 @Composable
 fun Home(
@@ -41,12 +45,34 @@ fun Home(
         }
     }
 
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = {
+            val snackBarMessage = stringResource(id = R.string.not_available_yet)
             TopAppBar(
-                title = { Text(text = "Home") }
+                title = { Text(text = "Home") },
+                actions = {
+                    if (currentDestination != Destination.Feed) {
+                        IconButton(
+                            onClick = {
+                                coroutineScope.launch {
+                                    scaffoldState.snackbarHostState
+                                        .showSnackbar(snackBarMessage)
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Info,
+                                contentDescription = stringResource(
+                                    id = R.string.cd_more_information
+                                )
+                            )
+                        }
+                    }
+                }
             )
         },
         floatingActionButton = {
