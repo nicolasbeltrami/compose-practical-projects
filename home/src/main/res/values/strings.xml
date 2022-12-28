@@ -3,4 +3,8 @@
     <string name="cd_create_item">Create new item</string>
     <string name="cd_more_information">More information</string>
     <string name="not_available_yet">Not available yet</string>
+    <string name="label_name">Nicolás Beltrami</string>
+    <string name="label_email">contacto@beltrami.com</string>
+    <string name="log_out">Log Out</string>
+    <string name="cd_open_menu">Open Menu</string>
 </resources>

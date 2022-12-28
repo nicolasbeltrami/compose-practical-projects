@@ -1,5 +1,7 @@
 package com.nicobeltrami.home.ui
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.DrawerValue
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -9,6 +11,8 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -30,7 +34,8 @@ import kotlinx.coroutines.launch
 fun Home(
     modifier: Modifier = Modifier
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val scaffoldState = rememberScaffoldState(drawerState)
     val navController = rememberNavController()
     val navBackStackEntry =
         navController.currentBackStackEntryAsState()
@@ -53,7 +58,24 @@ fun Home(
         topBar = {
             val snackBarMessage = stringResource(id = R.string.not_available_yet)
             TopAppBar(
-                title = { Text(text = "Home") },
+                title = {
+                    Text(text = Destination.Home.title)
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            coroutineScope.launch {
+                                drawerState.open()
+                            }
+                        }) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = stringResource(
+                                id = R.string.cd_open_menu
+                            )
+                        )
+                    }
+                },
                 actions = {
                     if (currentDestination != Destination.Feed) {
                         IconButton(
@@ -73,6 +95,18 @@ fun Home(
                         }
                     }
                 }
+            )
+        },
+        drawerContent = {
+            DrawerContent(
+                modifier = Modifier.fillMaxWidth(),
+                onNavigationSelected = { destination ->
+                    navController.navigate(destination.path)
+                    coroutineScope.launch {
+                        drawerState.close()
+                    }
+                },
+                onLogout = {}
             )
         },
         floatingActionButton = {

@@ -1,10 +1,12 @@
 package com.nicobeltrami.home
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.nicobeltrami.home.ui.ContentArea
 
 @Composable
@@ -15,21 +17,43 @@ fun Navigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Destination.Feed.path
+        startDestination = Destination.Home.path
     ) {
-        composable(route = Destination.Feed.path) {
+        navigation(
+            startDestination = Destination.Feed.path,
+            route = Destination.Home.path
+        ) {
+            composable(route = Destination.Feed.path) {
+                ContentArea(
+                    modifier = Modifier.fillMaxSize(),
+                    destination = Destination.Feed
+                )
+            }
+            composable(route = Destination.Contacts.path) {
+                ContentArea(
+                    modifier = Modifier.fillMaxSize(),
+                    destination = Destination.Contacts
+                )
+            }
+            composable(route = Destination.Calendar.path) {
+                ContentArea(
+                    modifier = Modifier.fillMaxSize(),
+                    destination = Destination.Calendar
+                )
+            }
+        }
+
+        composable(route = Destination.Upgrade.path) {
             ContentArea(
-                destination = Destination.Feed
+                modifier = Modifier.fillMaxSize(),
+                destination = Destination.Upgrade
             )
         }
-        composable(route = Destination.Contacts.path) {
+
+        composable(route = Destination.Settings.path) {
             ContentArea(
-                destination = Destination.Contacts
-            )
-        }
-        composable(route = Destination.Calendar.path) {
-            ContentArea(
-                destination = Destination.Calendar
+                modifier = Modifier.fillMaxSize(),
+                destination = Destination.Settings
             )
         }
     }
