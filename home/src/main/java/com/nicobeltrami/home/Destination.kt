@@ -18,8 +18,11 @@ sealed class Destination(
     object Feed : Destination("Feed", "feed", Icons.Default.List)
     object Contacts : Destination("Contacts", "contacts", Icons.Default.Person)
     object Calendar : Destination("Calendar", "calendar", Icons.Default.DateRange)
-    object Settings : Destination("Settings", "settings", Icons.Default.Settings)
-    object Upgrade : Destination("Upgrade", "upgrade", Icons.Default.Star)
+    object Settings :
+        Destination("Settings", "settings", Icons.Default.Settings, isRootDestination = false)
+
+    object Upgrade :
+        Destination("Upgrade", "upgrade", Icons.Default.Star, isRootDestination = false)
 
     companion object {
         fun fromString(route: String): Destination {
