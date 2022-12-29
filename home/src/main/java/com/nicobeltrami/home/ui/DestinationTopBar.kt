@@ -2,7 +2,7 @@ package com.nicobeltrami.home.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.nicobeltrami.home.Destination
+import com.nicobeltrami.home.model.Destination
 
 @Composable
 fun DestinationTopBar(

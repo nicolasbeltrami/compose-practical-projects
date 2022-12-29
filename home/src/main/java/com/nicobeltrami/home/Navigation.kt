@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.nicobeltrami.home.model.Destination
 import com.nicobeltrami.home.ui.ContentArea
 
 @Composable

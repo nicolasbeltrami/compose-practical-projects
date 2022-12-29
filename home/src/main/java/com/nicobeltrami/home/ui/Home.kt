@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.nicobeltrami.home.Destination
+import com.nicobeltrami.home.model.Destination
 import com.nicobeltrami.home.R
 import kotlinx.coroutines.launch
 

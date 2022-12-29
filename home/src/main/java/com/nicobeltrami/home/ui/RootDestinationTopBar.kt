@@ -10,7 +10,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.nicobeltrami.home.Destination
+import com.nicobeltrami.home.model.Destination
 import com.nicobeltrami.home.R
 
 @Composable

@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.nicobeltrami.home.Destination
-import com.nicobeltrami.home.NavigationBarItem.Companion.buildNavigationItems
+import com.nicobeltrami.home.model.Destination
+import com.nicobeltrami.home.model.NavigationBarItem.Companion.buildNavigationItems
 import com.nicobeltrami.home.R
 
 @Composable

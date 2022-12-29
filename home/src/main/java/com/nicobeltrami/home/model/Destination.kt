@@ -1,4 +1,4 @@
-package com.nicobeltrami.home
+package com.nicobeltrami.home.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add

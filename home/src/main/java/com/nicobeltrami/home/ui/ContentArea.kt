@@ -1,6 +1,5 @@
 package com.nicobeltrami.home.ui
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nicobeltrami.home.Destination
+import com.nicobeltrami.home.model.Destination
 
 @Composable
 fun ContentArea(
