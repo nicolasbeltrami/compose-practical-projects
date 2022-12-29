@@ -1,38 +1,35 @@
 package com.nicobeltrami.home.ui
 
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.DrawerValue
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberDrawerState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.nicobeltrami.home.Navigation
-import com.nicobeltrami.home.R
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.nicobeltrami.home.Destination
+import com.nicobeltrami.home.R
 import kotlinx.coroutines.launch
 
 @Composable
 fun Home(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    orientation: Int
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scaffoldState = rememberScaffoldState(drawerState)
@@ -85,7 +82,9 @@ fun Home(
             )
         },
         floatingActionButton = {
-            if (currentDestination == Destination.Feed) {
+            if (orientation != Configuration.ORIENTATION_LANDSCAPE &&
+                currentDestination == Destination.Feed
+            ) {
                 FloatingActionButton(
                     onClick = {
                         navController.navigate(
@@ -100,25 +99,48 @@ fun Home(
             }
         },
         bottomBar = {
-            BottomNavigationBar(
-                currentDestination = currentDestination,
-                onNavigate = {
-                    navController.navigate(it.path) {
-                        popUpTo(
-                            navController.graph.findStartDestination().id
-                        ) {
-                            saveState = true
+            if (orientation == Configuration.ORIENTATION_PORTRAIT &&
+                currentDestination.isRootDestination
+            ) {
+                BottomNavigationBar(
+                    currentDestination = currentDestination,
+                    onNavigate = {
+                        navController.navigate(it.path) {
+                            popUpTo(
+                                navController.graph.findStartDestination().id
+                            ) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
                     }
-                }
-            )
+                )
+            }
         }
     ) {
-        Navigation(
-            modifier = modifier,
-            navController = navController
+        Body(
+            modifier = Modifier,
+            navController = navController,
+            destination = currentDestination,
+            orientation = orientation,
+            onCreateItem = { navController.navigate(Destination.Add.path) },
+            onNavigate = {
+                navController.navigate(it.path) {
+                    popUpTo(Destination.Home.path) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+
+            }
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomePreview() {
+    Home(modifier = Modifier.fillMaxSize(), orientation = Configuration.ORIENTATION_LANDSCAPE)
 }

@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import com.nicobeltrami.home.ui.Home
 import com.nicobeltrami.home.ui.theme.PracticalComposeTheme
@@ -17,7 +18,10 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Home()
+            Home(
+                modifier = Modifier.fillMaxSize(),
+                orientation = LocalConfiguration.current.orientation
+            )
         }
     }
 }
@@ -25,5 +29,5 @@ class HomeActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
-    Home()
+    Home(orientation = LocalConfiguration.current.orientation)
 }
