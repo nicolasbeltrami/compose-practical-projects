@@ -85,11 +85,18 @@ fun Home(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(id = R.string.cd_create_item)
-                )
+            if (currentDestination == Destination.Feed) {
+                FloatingActionButton(
+                    onClick = {
+                        navController.navigate(
+                            Destination.Creation.path
+                        )
+                    }) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = stringResource(id = R.string.cd_create_item)
+                    )
+                }
             }
         },
         bottomBar = {

@@ -1,6 +1,7 @@
 package com.nicobeltrami.home
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
@@ -23,6 +24,8 @@ sealed class Destination(
 
     object Upgrade :
         Destination("Upgrade", "upgrade", Icons.Default.Star, isRootDestination = false)
+    object Creation : Destination("Creation", "creation", isRootDestination = false)
+    object Add : Destination("Add", "add", icon = Icons.Default.Add, isRootDestination = false)
 
     companion object {
         fun fromString(route: String): Destination {
@@ -32,6 +35,8 @@ sealed class Destination(
                 Contacts.path -> Contacts
                 Upgrade.path -> Upgrade
                 Settings.path -> Settings
+                Add.path -> Add
+                Creation.path -> Creation
                 else -> Home
             }
         }
