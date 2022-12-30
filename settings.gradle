@@ -16,3 +16,4 @@ rootProject.name = "PracticalCompose"
 include ':settings'
 include ':authentication'
 include ':home'
+include ':inbox'
